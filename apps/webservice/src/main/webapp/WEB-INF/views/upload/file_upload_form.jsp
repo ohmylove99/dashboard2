@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Spring MVC Multiple File Upload</title>
-<script
-src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 <script>
 $(document).ready(function() {
     //add more file components if Add is clicked
@@ -21,7 +20,7 @@ $(document).ready(function() {
 <body>
 
  
-<form:form method="post" action="upload.html"
+<form method="post" action="upload.html"
         modelAttribute="uploadForm" enctype="multipart/form-data">
  
     <p>Select files to upload. Press Add button to add more file inputs.</p>
@@ -36,6 +35,6 @@ $(document).ready(function() {
         </tr> -->
     </table>
     <br/><input type="submit" value="Upload" />
-</form:form>
+</form>
 </body>
 </html>
