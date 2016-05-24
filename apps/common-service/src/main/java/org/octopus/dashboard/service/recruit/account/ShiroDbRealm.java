@@ -1,4 +1,4 @@
-package org.octopus.dashboard.service.account;
+package org.octopus.dashboard.service.recruit.account;
 
 import java.io.Serializable;
 

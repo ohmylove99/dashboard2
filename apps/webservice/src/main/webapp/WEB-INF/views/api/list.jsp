@@ -15,6 +15,9 @@
 	<ul>
 		<li>Task List: <a href="${reqUrl}/api/v1/task">${reqUrl}/api/v1/task</a></li>
 		<li>Task Get(id=1) : <a href="${reqUrl}/api/v1/task/1">${reqUrl}/api/v1/task/1</a></li>
+		
+		<li>Project List: <a href="${reqUrl}/api/v1/project">${reqUrl}/api/v1/project</a></li>
+		<li>Project Get(id=1) : <a href="${reqUrl}/api/v1/project/1">${reqUrl}/api/v1/project/1</a></li>
 	</ul>
 
 	<h4>Update API</h4>

@@ -1,14 +1,14 @@
-package org.octopus.dashboard.service.account;
+package org.octopus.dashboard.service.recruit.account;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.hibernate.service.spi.ServiceException;
 import org.octopus.dashboard.dao.recruit.TaskDaoRepository;
 import org.octopus.dashboard.dao.recruit.UserDaoRepository;
 import org.octopus.dashboard.model.recruit.User;
-import org.octopus.dashboard.service.account.ShiroDbRealm.ShiroUser;
-import org.octopus.dashboard.shared.exception.ServiceException;
+import org.octopus.dashboard.service.recruit.account.ShiroDbRealm.ShiroUser;
 import org.octopus.dashboard.shared.security.Digests;
 import org.octopus.dashboard.shared.utils.Encodes;
 import org.octopus.dashboard.shared.utils.clock.ClockFactory;

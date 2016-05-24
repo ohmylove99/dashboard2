@@ -15,7 +15,7 @@ public class ProjectMapper implements RowMapper {
 		TProject t = new TProject();
 
 		t.setId(rs.getLong("ID"));
-		t.setName(rs.getString("TITLE"));
+		t.setName(rs.getString("NAME"));
 
 		return t;
 	}

@@ -1,12 +1,13 @@
-package org.octopus.dashboard.rest;
+package org.octopus.dashboard.rest.spring;
 
 import java.net.URI;
 import java.util.List;
 
 import javax.validation.Validator;
 
-import org.octopus.dashboard.model.recruit.Resume;
-import org.octopus.dashboard.service.recruit.ResumeService;
+import org.octopus.dashboard.model.TProject;
+import org.octopus.dashboard.rest.RestException;
+import org.octopus.dashboard.service.spring.ProjectService;
 import org.octopus.dashboard.shared.beanvalidator.BeanValidators;
 import org.octopus.dashboard.shared.constants.MediaTypes;
 import org.slf4j.Logger;
@@ -24,43 +25,43 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping(value = "/api/v1/resume")
-public class ResumeRestController {
+@RequestMapping(value = "/api/v1/project")
+public class ProjectRestController {
 
-	private static Logger logger = LoggerFactory.getLogger(ResumeRestController.class);
+	private static Logger logger = LoggerFactory.getLogger(ProjectRestController.class);
 
 	@Autowired
-	private ResumeService resumeService;
+	private ProjectService projectServiceImpl;
 
 	@Autowired
 	private Validator validator;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public List<Resume> list() {
-		return resumeService.getAllResume();
+	public List<TProject> list() {
+		return projectServiceImpl.gets();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
-	public Resume get(@PathVariable("id") Long id) {
-		Resume resume = resumeService.getResume(id);
-		if (resume == null) {
+	public TProject get(@PathVariable("id") Long id) {
+		TProject task = projectServiceImpl.get(id);
+		if (task == null) {
 			String message = "not found (id:" + id + ")";
 			logger.warn(message);
 			throw new RestException(HttpStatus.NOT_FOUND, message);
 		}
-		return resume;
+		return task;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaTypes.JSON)
-	public ResponseEntity<?> create(@RequestBody Resume resume, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<?> create(@RequestBody TProject task, UriComponentsBuilder uriBuilder) {
 
-		BeanValidators.validateWithException(validator, resume);
+		BeanValidators.validateWithException(validator, task);
 
-		resumeService.saveResume(resume);
+		projectServiceImpl.save(task);
 
-		Long id = resume.getId();
-		URI uri = uriBuilder.path("/api/v1/resume/" + id).build().toUri();
+		Long id = task.getId();
+		URI uri = uriBuilder.path("/api/v1/task/" + id).build().toUri();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(uri);
 
@@ -69,16 +70,16 @@ public class ResumeRestController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaTypes.JSON)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@RequestBody Resume resume) {
+	public void update(@RequestBody TProject task) {
 
-		BeanValidators.validateWithException(validator, resume);
+		BeanValidators.validateWithException(validator, task);
 
-		resumeService.saveResume(resume);
+		projectServiceImpl.save(task);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
-		resumeService.deleteResume(id);
+		projectServiceImpl.delete(id);
 	}
 }

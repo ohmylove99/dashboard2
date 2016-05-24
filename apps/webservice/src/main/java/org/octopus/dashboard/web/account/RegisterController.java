@@ -3,7 +3,7 @@ package org.octopus.dashboard.web.account;
 import javax.validation.Valid;
 
 import org.octopus.dashboard.model.recruit.User;
-import org.octopus.dashboard.service.account.AccountService;
+import org.octopus.dashboard.service.recruit.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

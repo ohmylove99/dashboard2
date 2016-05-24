@@ -6,7 +6,7 @@ import java.util.List;
 import javax.validation.Validator;
 
 import org.octopus.dashboard.model.recruit.Task;
-import org.octopus.dashboard.service.task.TaskService;
+import org.octopus.dashboard.service.recruit.TaskService;
 import org.octopus.dashboard.shared.beanvalidator.BeanValidators;
 import org.octopus.dashboard.shared.constants.MediaTypes;
 import org.slf4j.Logger;

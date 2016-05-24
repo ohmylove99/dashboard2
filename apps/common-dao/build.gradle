@@ -4,33 +4,35 @@ dependencies {
 	compile project(':apps:common-model')
 		
 	compile group: 'commons-configuration', name: 'commons-configuration', version:'1.6'
-	compile group: 'org.springframework', name: 'spring-jdbc', version:'4.2.5.RELEASE'
-    compile group: 'com.google.guava', name: 'guava', version:'17.0'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.3.2'
-    compile group: 'commons-codec', name: 'commons-codec', version:'1.9'
-    compile group: 'commons-io', name: 'commons-io', version:'2.4'
-    compile(group: 'commons-beanutils', name: 'commons-beanutils', version:'1.9.2') {
-exclude(module: 'commons-logging')
+	// Jpa + Hibernate
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version:'4.3.5.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.0.3.Final'
+    
+    // Spring Aop
+    compile group: 'org.aspectj', name: 'aspectjrt', version:'1.7.4'
+    runtime group: 'org.aspectj', name: 'aspectjweaver', version:'1.7.4'
+    testCompile group: 'org.assertj', name: 'assertj-core', version:'1.6.1'
+    compile group: 'org.springframework', name: 'spring-aop', version:'4.2.5.RELEASE'
+    
+	compile group: 'org.springframework', name: 'spring-orm', version:'4.2.5.RELEASE'
+    // Spring
+    compile group: 'org.springframework', name: 'spring-context-support', version:'4.2.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version:'4.2.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version:'4.2.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version:'4.2.5.RELEASE'
+    
+    compile (group: 'org.springframework.data', name: 'spring-data-jpa', version:'1.9.4.RELEASE'){
+    	exclude(module: 'org.springframework')
     }
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.4.0'
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-jaxb-annotations', version:'2.4.0'
-    compile(group: 'net.sf.dozer', name: 'dozer', version:'5.5.1') {
-exclude(module: 'slf4j-log4j12')
-    }
+    
+    compile group: 'org.springframework', name: 'spring-web', version:'4.2.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version:'4.2.5.RELEASE'
+    testCompile group: 'org.springframework', name: 'spring-test', version:'4.2.5.RELEASE'
+    
     compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.7'
     compile group: 'ch.qos.logback', name: 'logback-classic', version:'1.1.2'
     testCompile group: 'org.eclipse.jetty.aggregate', name: 'jetty-webapp', version:'7.6.15.v20140411'
-    testCompile(group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'2.42.2') {
-exclude(module: 'selenium-android-driver')
-exclude(module: 'selenium-iphone-driver')
-exclude(module: 'selenium-htmlunit-driver')
-exclude(module: 'selenium-safari-driver')
-exclude(module: 'commons-logging')
-    }
-    testCompile(group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version:'2.42.2') {
-exclude(module: 'cglib-nodep')
-exclude(module: 'commons-logging')
-    }
+    
     testCompile group: 'junit', name: 'junit', version:'4.11'
     testCompile group: 'org.assertj', name: 'assertj-core', version:'1.6.1'
     testCompile group: 'org.mockito', name: 'mockito-core', version:'1.9.5'

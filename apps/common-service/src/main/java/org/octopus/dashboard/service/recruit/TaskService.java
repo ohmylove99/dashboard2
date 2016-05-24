@@ -1,10 +1,10 @@
-package org.octopus.dashboard.service.resume;
+package org.octopus.dashboard.service.recruit;
 
 import java.util.List;
 import java.util.Map;
 
-import org.octopus.dashboard.dao.recruit.ResumeDaoRepository;
-import org.octopus.dashboard.model.recruit.Resume;
+import org.octopus.dashboard.dao.recruit.TaskDaoRepository;
+import org.octopus.dashboard.model.recruit.Task;
 import org.octopus.dashboard.shared.persistence.DynamicSpecifications;
 import org.octopus.dashboard.shared.persistence.SearchFilter;
 import org.octopus.dashboard.shared.persistence.SearchFilter.Operator;
@@ -19,32 +19,32 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional
-public class ResumeService {
+public class TaskService {
 
-	private ResumeDaoRepository resumeDao;
+	private TaskDaoRepository taskDao;
 
-	public Resume getResume(Long id) {
-		return resumeDao.findOne(id);
+	public Task getTask(Long id) {
+		return taskDao.findOne(id);
 	}
 
-	public void saveResume(Resume entity) {
-		resumeDao.save(entity);
+	public void saveTask(Task entity) {
+		taskDao.save(entity);
 	}
 
-	public void deleteResume(Long id) {
-		resumeDao.delete(id);
+	public void deleteTask(Long id) {
+		taskDao.delete(id);
 	}
 
-	public List<Resume> getAllResume() {
-		return (List<Resume>) resumeDao.findAll();
+	public List<Task> getAllTask() {
+		return (List<Task>) taskDao.findAll();
 	}
 
-	public Page<Resume> getUserResume(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
+	public Page<Task> getUserTask(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		Specification<Resume> spec = buildSpecification(userId, searchParams);
+		Specification<Task> spec = buildSpecification(userId, searchParams);
 
-		return resumeDao.findAll(spec, pageRequest);
+		return taskDao.findAll(spec, pageRequest);
 	}
 
 	private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
@@ -58,15 +58,15 @@ public class ResumeService {
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}
 
-	private Specification<Resume> buildSpecification(Long userId, Map<String, Object> searchParams) {
+	private Specification<Task> buildSpecification(Long userId, Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
 		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
-		Specification<Resume> spec = DynamicSpecifications.bySearchFilter(filters.values(), Resume.class);
+		Specification<Task> spec = DynamicSpecifications.bySearchFilter(filters.values(), Task.class);
 		return spec;
 	}
 
 	@Autowired
-	public void setResumeDao(ResumeDaoRepository resumeDao) {
-		this.resumeDao = resumeDao;
+	public void setTaskDao(TaskDaoRepository taskDao) {
+		this.taskDao = taskDao;
 	}
 }

@@ -11,7 +11,7 @@
 		<property name="cacheManager" ref="shiroEhcacheManager" />
 	</bean>
 
-	<bean id="shiroDbRealm" class="org.octopus.dashboard.service.account.ShiroDbRealm">
+	<bean id="shiroDbRealm" class="org.octopus.dashboard.service.recruit.account.ShiroDbRealm">
 		<property name="accountService" ref="accountService" />
 	</bean>
 

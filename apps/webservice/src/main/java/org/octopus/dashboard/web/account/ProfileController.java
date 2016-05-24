@@ -4,8 +4,8 @@ import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.octopus.dashboard.model.recruit.User;
-import org.octopus.dashboard.service.account.AccountService;
-import org.octopus.dashboard.service.account.ShiroDbRealm.ShiroUser;
+import org.octopus.dashboard.service.recruit.account.AccountService;
+import org.octopus.dashboard.service.recruit.account.ShiroDbRealm.ShiroUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

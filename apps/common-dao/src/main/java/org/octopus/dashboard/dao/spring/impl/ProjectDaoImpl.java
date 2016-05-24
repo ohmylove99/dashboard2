@@ -8,10 +8,23 @@ import org.octopus.dashboard.model.TProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProjectDaoImpl extends BaseSpringDao implements ProjectDao {
 
 	private static Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);
+
+	@Override
+	public void initDao() {
+		if (logger.isDebugEnabled())
+			logger.debug("init() - Start");
+
+		initStatements("org/octopus/dashboard/dao/spring/impl/ProjectDaoImpl");
+
+		if (logger.isDebugEnabled())
+			logger.debug("init() - End");
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -49,14 +62,32 @@ public class ProjectDaoImpl extends BaseSpringDao implements ProjectDao {
 		}
 	}
 
-	public boolean addProject(TProject t) {
+	public boolean save(TProject t) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("addProject( " + t.toString() + ")");
+			logger.debug("saveProject( " + t.toString() + ")");
 		}
-
+		int update;
 		try {
-			getJdbcTemplate().update(getStatement("insert.project"), new Object[] { t.getName() });
+			if (t.getId() > 0)
+				update = getJdbcTemplate().update(getStatement("update.project"), new Object[] { t.getName() });
+			else
+				update = getJdbcTemplate().update(getStatement("insert.project"), new Object[] { t.getName() });
+			return update > 0;
+		} catch (DataAccessException ex) {
+			logger.error("Error executing query: " + ex.getClass() + ":" + ex.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(long id) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("deleteProject( " + id + ")");
+		}
+		int update;
+		try {
+			update = getJdbcTemplate().update(getStatement("delete.project"), new Object[] { id });
 			return true;
 		} catch (DataAccessException ex) {
 			logger.error("Error executing query: " + ex.getClass() + ":" + ex.getMessage());

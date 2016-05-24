@@ -10,5 +10,7 @@ public interface ProjectDao {
 
 	public List<TProject> getProjects();
 
-	public boolean addProject(TProject t);
+	public boolean save(TProject t);
+
+	public boolean delete(long id);
 }

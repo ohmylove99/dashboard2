@@ -10,3 +10,6 @@ insert into ss_resumehis (id, name, description, kvs,job_id,pid,version) values(
 insert into ss_job (id, name, description, grade,version) values(1, '.Net Sr. Developer','http://www.playframework.org/', 'G1',1);
 insert into ss_job (id, name, description, grade,version) values(2, 'C++ Sr. Developer','http://www.playframework.org/', 'G1',2);
 insert into ss_jobhis (id, name, description, grade,pid,version) values(2, 'C++ Sr. Developer','http://www.playframework.org/', 'G1',2,1);
+
+
+insert into tt_project (id, name) values(1, 'My Project');

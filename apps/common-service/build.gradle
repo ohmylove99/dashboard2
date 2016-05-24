@@ -3,7 +3,14 @@ description = 'Octopus :: Core :: Spring JDBC'
 dependencies {
 	compile project(':apps:common-model')
 	compile project(':apps:common-dao')
+	compile project(':shared:shared-core')
+	compile project(':shared:shared-hibernate')
 		
+		
+	// Shiro
+    compile group: 'org.apache.shiro', name: 'shiro-spring', version:'1.2.3'
+    compile group: 'org.apache.shiro', name: 'shiro-ehcache', version:'1.2.3'
+    	
 	compile group: 'commons-configuration', name: 'commons-configuration', version:'1.6'
 	compile group: 'org.springframework', name: 'spring-jdbc', version:'4.2.5.RELEASE'
     compile group: 'com.google.guava', name: 'guava', version:'17.0'

@@ -8,7 +8,9 @@ import org.octopus.dashboard.model.TTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TaskDaoImpl extends BaseSpringDao implements TaskDao {
 
 	private static Logger logger = LoggerFactory.getLogger(TaskDaoImpl.class);

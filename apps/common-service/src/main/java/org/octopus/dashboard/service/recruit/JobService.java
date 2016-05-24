@@ -1,4 +1,4 @@
-package org.octopus.dashboard.service.job;
+package org.octopus.dashboard.service.recruit;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.octopus.dashboard.dao.recruit.JobDaoRepository;
 import org.octopus.dashboard.dao.recruit.ResumeDaoRepository;
 import org.octopus.dashboard.model.recruit.Job;
-import org.octopus.dashboard.service.account.ShiroDbRealm.ShiroUser;
+import org.octopus.dashboard.service.recruit.account.ShiroDbRealm.ShiroUser;
 import org.octopus.dashboard.shared.utils.clock.ClockFactory;
 import org.octopus.dashboard.shared.utils.clock.IClock;
 import org.springframework.beans.factory.annotation.Autowired;

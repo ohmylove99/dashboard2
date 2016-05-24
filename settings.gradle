@@ -1,4 +1,4 @@
 
-include "shared:shared-core", "shared:shared-hibernate", "shared:shared-oauth","shared:shared-spring-jdbc","shared:shared-spring-mvc","shared:shared-test","shared:shared-web"
+include "shared:shared-core", "shared:shared-hibernate", "shared:shared-oauth","shared:shared-spring-jdbc","shared:shared-test","shared:shared-web"
 include "apps:common-service","apps:common-dao","apps:common-model"
 include "apps:webapp","apps:webservice"
