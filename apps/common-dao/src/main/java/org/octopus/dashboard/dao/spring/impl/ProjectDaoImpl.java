@@ -88,7 +88,7 @@ public class ProjectDaoImpl extends BaseSpringDao implements ProjectDao {
 		int update;
 		try {
 			update = getJdbcTemplate().update(getStatement("delete.project"), new Object[] { id });
-			return true;
+			return update > 0;
 		} catch (DataAccessException ex) {
 			logger.error("Error executing query: " + ex.getClass() + ":" + ex.getMessage());
 			return false;

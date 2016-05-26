@@ -5,7 +5,7 @@ import java.util.List;
 import org.octopus.dashboard.model.TProject;
 
 public interface ProjectService {
-	public boolean save(TProject project);
+	public boolean save(TProject obj);
 
 	public boolean delete(long id);
 

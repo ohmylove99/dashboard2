@@ -20,8 +20,8 @@ public class TaskAuditMapper implements RowMapper {
 
 		t.setVersion(rs.getLong("VERSION"));
 		t.setName(rs.getString("TASK"));
-		t.setUpdatedBy(rs.getString("UPDATEDBY"));
-		t.setUpdatedTime(rs.getTimestamp("UPDATEDTIME"));
+		t.setUpdatedBy(rs.getString("UPDATED_BY"));
+		t.setUpdatedTime(rs.getTimestamp("UPDATED_TIME"));
 
 		return t;
 	}

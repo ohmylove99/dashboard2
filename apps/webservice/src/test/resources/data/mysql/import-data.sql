@@ -13,3 +13,9 @@ insert into ss_jobhis (id, name, description, grade,pid,version) values(2, 'C++ 
 
 
 insert into tt_project (id, name) values(1, 'My Project');
+insert into tt_project (id, name) values(2, 'Your Project');
+
+insert into tt_task (id, version, name) values(1, 1, 'My Task Current');
+insert into tt_taskAudit (id, version, name) values(1, 1, 'My Task History1');
+insert into tt_taskAudit (id, version, name) values(2, 2, 'My Task History2');
+insert into tt_taskAudit (id, version, name) values(3, 3, 'My Task History3');

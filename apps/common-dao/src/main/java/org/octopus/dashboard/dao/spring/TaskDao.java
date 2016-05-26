@@ -11,4 +11,6 @@ public interface TaskDao {
 	public List<TTask> gets();
 
 	public boolean save(TTask t);
+	
+	public boolean delete(long id);
 }

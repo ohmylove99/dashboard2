@@ -15,6 +15,17 @@ public class TaskAuditDaoImpl extends BaseSpringDao implements TaskAuditDao {
 
 	private static Logger logger = LoggerFactory.getLogger(TaskAuditDaoImpl.class);
 
+	@Override
+	public void initDao() {
+		if (logger.isDebugEnabled())
+			logger.debug("init() - Start");
+
+		initStatements("org/octopus/dashboard/dao/spring/impl/TaskAuditDaoImpl");
+
+		if (logger.isDebugEnabled())
+			logger.debug("init() - End");
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -58,7 +69,7 @@ public class TaskAuditDaoImpl extends BaseSpringDao implements TaskAuditDao {
 		}
 
 		try {
-			getJdbcTemplate().update(getStatement("insert.taskAudit"), new Object[] { t.getName() });
+			getJdbcTemplate().update(getStatement("insert.taskAudit"), new Object[] { t.getName(),  t.getPid() , t.getVersion()});
 			return true;
 		} catch (DataAccessException ex) {
 			logger.error("Error executing query: " + ex.getClass() + ":" + ex.getMessage());
