@@ -77,7 +77,6 @@ public class TaskDaoImpl extends BaseSpringDao implements TaskDao {
 			logger.debug("save Task( " + t.toString() + ")");
 		}
 		int update;
-		KeyHolder keyHolder = new GeneratedKeyHolder();
 		try {
 			if (t.getId() > 0) {
 				update = getJdbcTemplate().update(getStatement("update.task"), new Object[] { t.getName() });
@@ -101,6 +100,7 @@ public class TaskDaoImpl extends BaseSpringDao implements TaskDao {
 		parameters.put("VERSION", 1);
 		Number newId = insertActor.executeAndReturnKey(parameters);
 		t.setId(newId.longValue());
+		t.setVersion(1);
 	}
 
 	@Override
