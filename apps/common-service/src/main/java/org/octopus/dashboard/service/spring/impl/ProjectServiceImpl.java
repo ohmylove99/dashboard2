@@ -30,12 +30,12 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public TProject get(long id) {
-		return projectDao.getProject(id);
+		return projectDao.get(id);
 	}
 
 	@Override
 	public List<TProject> gets() {
-		return projectDao.getProjects();
+		return projectDao.gets();
 	}
 
 }

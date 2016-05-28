@@ -1,6 +1,8 @@
 
 description = 'Octopus :: Core :: Core'
 dependencies {
+	compile group: 'org.springframework', name: 'spring-core', version:'4.2.5.RELEASE'
+
     compile group: 'com.google.guava', name: 'guava', version:'17.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.3.2'
     compile group: 'commons-codec', name: 'commons-codec', version:'1.9'

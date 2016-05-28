@@ -6,9 +6,9 @@ import org.octopus.dashboard.model.TProject;
 
 public interface ProjectDao {
 
-	public TProject getProject(long id);
+	public TProject get(long id);
 
-	public List<TProject> getProjects();
+	public List<TProject> gets();
 
 	public boolean save(TProject t);
 

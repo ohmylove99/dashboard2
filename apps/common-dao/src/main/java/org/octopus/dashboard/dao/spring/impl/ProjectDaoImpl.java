@@ -30,7 +30,7 @@ public class ProjectDaoImpl extends BaseSpringDao implements ProjectDao {
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public TProject getProject(long id) {
+	public TProject get(long id) {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getproject(" + id + ")");
@@ -49,7 +49,7 @@ public class ProjectDaoImpl extends BaseSpringDao implements ProjectDao {
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public List<TProject> getProjects() {
+	public List<TProject> gets() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getprojects()");
 		}

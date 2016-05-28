@@ -1,4 +1,4 @@
-package org.octopus.dashboard.rest;
+package org.octopus.dashboard.rest.recruit;
 
 import java.net.URI;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Validator;
 
 import org.octopus.dashboard.model.recruit.Resume;
+import org.octopus.dashboard.rest.RestException;
 import org.octopus.dashboard.service.recruit.ResumeService;
 import org.octopus.dashboard.shared.beanvalidator.BeanValidators;
 import org.octopus.dashboard.shared.constants.MediaTypes;
