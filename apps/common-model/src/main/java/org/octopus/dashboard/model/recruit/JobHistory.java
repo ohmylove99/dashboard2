@@ -2,11 +2,10 @@ package org.octopus.dashboard.model.recruit;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,7 +13,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Entity
 @Table(name = "ss_jobhis")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
+//@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
+@NamedQuery(name = "JobHistory.findAll", query = "SELECT j FROM JobHistory j")
 public class JobHistory extends IdAuditEntity {
 
 	protected String name;
@@ -24,6 +24,34 @@ public class JobHistory extends IdAuditEntity {
 	protected Date closedTime;
 	protected String openBy;
 	protected String closedBy;
+	protected String openByBiz;
+	protected String interviewer;
+	protected String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getOpenByBiz() {
+		return openByBiz;
+	}
+
+	public void setOpenByBiz(String openByBiz) {
+		this.openByBiz = openByBiz;
+	}
+
+	public String getInterviewer() {
+		return interviewer;
+	}
+
+	public void setInterviewer(String interviewer) {
+		this.interviewer = interviewer;
+	}
+
 	//
 	protected String pid;
 	protected Long version;

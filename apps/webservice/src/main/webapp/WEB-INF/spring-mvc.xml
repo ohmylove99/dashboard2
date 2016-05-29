@@ -43,7 +43,7 @@
 
 	<mvc:default-servlet-handler />
 
-	<mvc:view-controller path="/" view-name="redirect:/task" />
+	<mvc:view-controller path="/" view-name="redirect:/job" />
 
 
 	<bean

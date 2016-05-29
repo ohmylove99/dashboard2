@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class TaskService {
-
+	@Autowired
 	private TaskDaoRepository taskDao;
 
 	public Task getTask(Long id) {
@@ -65,8 +65,4 @@ public class TaskService {
 		return spec;
 	}
 
-	@Autowired
-	public void setTaskDao(TaskDaoRepository taskDao) {
-		this.taskDao = taskDao;
-	}
 }

@@ -3,11 +3,14 @@ package org.octopus.dashboard.service.recruit;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
 import org.octopus.dashboard.dao.recruit.ResumeDaoRepository;
 import org.octopus.dashboard.model.recruit.Resume;
+import org.octopus.dashboard.service.recruit.account.ShiroDbRealm.ShiroUser;
 import org.octopus.dashboard.shared.persistence.DynamicSpecifications;
 import org.octopus.dashboard.shared.persistence.SearchFilter;
-import org.octopus.dashboard.shared.persistence.SearchFilter.Operator;
+import org.octopus.dashboard.shared.utils.clock.ClockFactory;
+import org.octopus.dashboard.shared.utils.clock.IClock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,8 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class ResumeService {
-
+	@Autowired
 	private ResumeDaoRepository resumeDao;
+	private IClock clock = ClockFactory.getClock();
 
 	public Resume getResume(Long id) {
 		return resumeDao.findOne(id);
@@ -39,10 +43,26 @@ public class ResumeService {
 		return (List<Resume>) resumeDao.findAll();
 	}
 
-	public Page<Resume> getUserResume(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
-			String sortType) {
+	public void createResume(Resume resume) {
+
+		resume.setUpdatedBy(getCurrentUserName());
+		resume.setUpdatedTime(clock.getCurrentDate());
+
+		resumeDao.save(resume);
+	}
+
+	private String getCurrentUserName() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user.loginName;
+	}
+
+	public void updateResume(Resume resume) {
+		resumeDao.save(resume);
+	}
+
+	public Page<Resume> getResumes(Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		Specification<Resume> spec = buildSpecification(userId, searchParams);
+		Specification<Resume> spec = buildSpecification(searchParams);
 
 		return resumeDao.findAll(spec, pageRequest);
 	}
@@ -58,15 +78,10 @@ public class ResumeService {
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
 	}
 
-	private Specification<Resume> buildSpecification(Long userId, Map<String, Object> searchParams) {
+	private Specification<Resume> buildSpecification(Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
 		Specification<Resume> spec = DynamicSpecifications.bySearchFilter(filters.values(), Resume.class);
 		return spec;
 	}
 
-	@Autowired
-	public void setResumeDao(ResumeDaoRepository resumeDao) {
-		this.resumeDao = resumeDao;
-	}
 }

@@ -18,6 +18,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class ResumeHistory extends IdAuditEntity {
 	private Job job;
 	private String name;
+	protected String status;
+	protected String skills;
+	protected String uploadFileName;
+	protected String uploadFileLink;
 
 	private String description;
 	private String kvs;
@@ -26,6 +30,38 @@ public class ResumeHistory extends IdAuditEntity {
 	//
 	protected String pid;
 	protected Long version;
+
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
+	}
+
+	public String getUploadFileLink() {
+		return uploadFileLink;
+	}
+
+	public void setUploadFileLink(String uploadFileLink) {
+		this.uploadFileLink = uploadFileLink;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getPid() {
 		return pid;

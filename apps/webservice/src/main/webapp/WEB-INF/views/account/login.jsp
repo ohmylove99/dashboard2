@@ -45,8 +45,8 @@
 				<label class="checkbox" for="rememberMe"><input
 					type="checkbox" id="rememberMe" name="rememberMe" />Remember me</label> <input
 					id="submit_btn" class="btn btn-primary" type="submit" value="Login" />
-				<a class="btn" href="${ctx}/register">注册</a> <span
-					class="help-block">(Admin: <b>admin/admin</b>, Users: <b>user/user</b>)
+				<a class="btn" href="${ctx}/register">Register</a> <span
+					class="help-block">(Admin: <b>admin/admin</b>)
 				</span>
 			</div>
 		</div>

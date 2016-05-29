@@ -21,9 +21,32 @@ public class Job extends IdAuditEntity {
 	protected String name;
 	protected String description;
 	protected String grade;
+	protected String referenceid;
+
+	protected String emptype;
 	protected Date openTime;
 	protected Date closedTime;
 	protected String openBy;
+	protected String openByBiz;
+	protected String interviewer;
+	protected String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getInterviewer() {
+		return interviewer;
+	}
+
+	public void setInterviewer(String interviewer) {
+		this.interviewer = interviewer;
+	}
+
 	@Column(name = "closed_by")
 	protected String closedBy;
 
@@ -59,6 +82,22 @@ public class Job extends IdAuditEntity {
 		this.description = description;
 	}
 
+	public String getReferenceid() {
+		return referenceid;
+	}
+
+	public void setReferenceid(String referenceid) {
+		this.referenceid = referenceid;
+	}
+
+	public String getEmptype() {
+		return emptype;
+	}
+
+	public void setEmptype(String emptype) {
+		this.emptype = emptype;
+	}
+
 	public String getGrade() {
 		return grade;
 	}
@@ -91,6 +130,14 @@ public class Job extends IdAuditEntity {
 		this.openBy = openBy;
 	}
 
+	public String getOpenByBiz() {
+		return openByBiz;
+	}
+
+	public void setOpenByBiz(String openByBiz) {
+		this.openByBiz = openByBiz;
+	}
+
 	public String getClosedBy() {
 		return closedBy;
 	}
@@ -102,5 +149,27 @@ public class Job extends IdAuditEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public JobHistory createAudit() {
+		JobHistory t = new JobHistory();
+
+		t.setVersion(this.getVersion());
+		t.setName(this.getName());
+		t.setUpdatedBy(this.getUpdatedBy());
+		t.setUpdatedTime(this.getUpdatedTime());
+
+		t.setName(this.getName());
+		t.setDescription(this.getDescription());
+		t.setGrade(this.getGrade());
+
+		t.setOpenBy(this.getOpenBy());
+		t.setOpenByBiz(this.getOpenByBiz());
+
+		t.setStatus(this.getStatus());
+
+		t.setPid(this.getId().toString());
+
+		return t;
 	}
 }

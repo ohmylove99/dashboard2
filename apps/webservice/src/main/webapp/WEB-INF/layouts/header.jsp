@@ -5,7 +5,7 @@
 <div id="header">
 	<div id="title">
 		<h1>
-			<a href="${ctx}">Recruit</a> - <small>TodoList</small>
+			<a href="${ctx}"></a>  <small></small>
 			<shiro:user>
 				<div class="btn-group pull-right">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

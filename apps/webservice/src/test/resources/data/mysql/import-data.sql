@@ -11,6 +11,51 @@ insert into ss_job (id, name, description, grade,version) values(1, '.Net Sr. De
 insert into ss_job (id, name, description, grade,version) values(2, 'C++ Sr. Developer','http://www.playframework.org/', 'G1',2);
 insert into ss_jobhis (id, name, description, grade,pid,version) values(2, 'C++ Sr. Developer','http://www.playframework.org/', 'G1',2,1);
 
+insert into ss_m_emptype (id, name) values(1, 'DH');
+insert into ss_m_emptype (id, name) values(2, 'VD');
+
+insert into ss_m_jobstatus (id, name, isactive) values(1, 'Request', 0);
+insert into ss_m_jobstatus (id, name, isactive) values(2, 'RequestApproved', 0);
+insert into ss_m_jobstatus (id, name, isactive) values(3, 'Open', 1);
+insert into ss_m_jobstatus (id, name, isactive) values(4, 'Re-Open', 1);
+insert into ss_m_jobstatus (id, name, isactive) values(5, 'Open-Offer', 1);
+insert into ss_m_jobstatus (id, name, isactive) values(6, 'Open-Onboard', 1);
+insert into ss_m_jobstatus (id, name, isactive) values(7, 'Close', 1);
+
+insert into ss_m_interviewstatus (id, name) values(1, 'Pass');
+insert into ss_m_interviewstatus (id, name) values(2, 'Reject');
+
+insert into ss_m_interviewround (id, name) values(1, 'Tel-1st');
+insert into ss_m_interviewround (id, name) values(2, 'Tel-2st');
+insert into ss_m_interviewround (id, name) values(3, 'Tel-3st');
+insert into ss_m_interviewround (id, name) values(4, 'F2F-1st');
+insert into ss_m_interviewround (id, name) values(5, 'F2F-2st');
+insert into ss_m_interviewround (id, name) values(6, 'F2F-3st');
+insert into ss_m_interviewround (id, name) values(7, 'Final');
+
+insert into ss_m_jobgrade (id, name) values(1, 'C8');
+insert into ss_m_jobgrade (id, name) values(2, 'C9');
+insert into ss_m_jobgrade (id, name) values(3, 'C10');
+insert into ss_m_jobgrade (id, name) values(4, 'C11');
+insert into ss_m_jobgrade (id, name) values(5, 'C12');
+insert into ss_m_jobgrade (id, name) values(6, 'C13');
+insert into ss_m_jobgrade (id, name) values(7, 'C14');
+
+insert into ss_m_biz (id, name) values(1, 'dept1-team1');
+insert into ss_m_biz (id, name) values(2, 'dept1-team2');
+insert into ss_m_biz (id, name) values(3, 'dept2-team1');
+
+insert into ss_m_resumestatus (id, name, isactive) values(1, 'Resume-Review', 0);
+insert into ss_m_resumestatus (id, name, isactive) values(2, 'Resume-Review-Reject', 0);
+insert into ss_m_resumestatus (id, name, isactive) values(3, 'Resume-Review-Pass', 0);
+insert into ss_m_resumestatus (id, name, isactive) values(4, 'Interviewing', 0);
+insert into ss_m_resumestatus (id, name, isactive) values(5, 'Reject', 1);
+insert into ss_m_resumestatus (id, name, isactive) values(6, 'Pass', 1);
+insert into ss_m_resumestatus (id, name, isactive) values(7, 'Offer', 1);
+insert into ss_m_resumestatus (id, name, isactive) values(8, 'Offer-Reject', 1);
+insert into ss_m_resumestatus (id, name, isactive) values(9, 'Offer-Pass', 1);
+insert into ss_m_resumestatus (id, name, isactive) values(10, 'Onboarding', 1);
+insert into ss_m_resumestatus (id, name, isactive) values(11, 'Onboarded', 1);
 
 insert into tt_project (id, name) values(1, 'My Project');
 insert into tt_project (id, name) values(2, 'Your Project');
