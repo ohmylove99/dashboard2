@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.octopus.dashboard.dao.recruit.ResumeDaoRepository;
+import org.octopus.dashboard.dao.recruit.ResumeHistoryDaoRepository;
 import org.octopus.dashboard.model.recruit.Resume;
 import org.octopus.dashboard.service.recruit.account.ShiroDbRealm.ShiroUser;
 import org.octopus.dashboard.shared.persistence.DynamicSpecifications;
@@ -25,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ResumeService {
 	@Autowired
 	private ResumeDaoRepository resumeDao;
+	@Autowired
+	private ResumeHistoryDaoRepository resumeHistoryDao;
 	private IClock clock = ClockFactory.getClock();
 
 	public Resume getResume(Long id) {
@@ -36,7 +39,12 @@ public class ResumeService {
 	}
 
 	public void deleteResume(Long id) {
+
+		Resume resume = resumeDao.findOne(id);
+
 		resumeDao.delete(id);
+
+		resumeHistoryDao.save(resume.createAudit());
 	}
 
 	public List<Resume> getAllResume() {
@@ -58,6 +66,8 @@ public class ResumeService {
 
 	public void updateResume(Resume resume) {
 		resumeDao.save(resume);
+
+		resumeHistoryDao.save(resume.createAudit());
 	}
 
 	public Page<Resume> getResumes(Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType) {

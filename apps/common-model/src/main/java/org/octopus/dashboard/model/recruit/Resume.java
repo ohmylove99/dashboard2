@@ -20,12 +20,21 @@ public class Resume extends IdAuditEntity {
 	protected String skills;
 	protected String uploadFileName;
 	protected String uploadFileLink;
+	protected String contactInfo;
 
 	private String description;
 	private String kvs;
 	private byte[] originalDoc;
 	private byte[] convertedDoc;
 	protected Long version;
+
+	public String getContactInfo() {
+		return contactInfo;
+	}
+
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
+	}
 
 	public String getUploadFileName() {
 		return uploadFileName;
@@ -119,6 +128,25 @@ public class Resume extends IdAuditEntity {
 
 	public void setJob(Job job) {
 		this.job = job;
+	}
+
+	public ResumeHistory createAudit() {
+		ResumeHistory t = new ResumeHistory();
+
+		t.setVersion(this.getVersion());
+		t.setName(this.getName());
+		t.setUpdatedBy(this.getUpdatedBy());
+		t.setUpdatedTime(this.getUpdatedTime());
+
+		t.setName(this.getName());
+		t.setDescription(this.getDescription());
+		t.setContactInfo(this.getContactInfo());
+
+		t.setStatus(this.getStatus());
+
+		t.setPid(this.getId().toString());
+
+		return t;
 	}
 
 	@Override

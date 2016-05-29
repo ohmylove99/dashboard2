@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Job List</title>
+<title>Resume List</title>
 </head>
 
 <body>
@@ -30,30 +30,28 @@
 			<tr>
 				<th>Name</th>
 				<th>Description</th>
-				<th>OpenBy</th>
-				<th>OpenByBiz</th>
 				<th>Status</th>
 				<th>Manage</th>
+				<th>Resume</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${jobs.content}" var="Job">
+			<c:forEach items="${resumes.content}" var="Resume">
 				<tr>
-					<td><a href="${ctx}/Job/update/${Job.id}">${Job.name}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.description}">${Job.description}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.openBy}">${Job.openBy}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.openByBiz}">${Job.openByBiz}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.status}">${Job.status}</a></td>
-					<td><a href="${ctx}/Job/delete/${Job.id}">Delete</a></td>
+					<td><a href="${ctx}/resume/update/${Resume.id}">${Resume.name}</a></td>
+					<td>${Resume.description}</td>
+					<td>${Resume.status}</td>
+					<td><a href="${ctx}/resume/update/${Resume.id}">Update</a>|<a href="${ctx}/resume/delete/${Resume.id}">Delete</a></td>
+					<td><a href="${ctx}/uploadResumeForm?id=${Resume.id}">Upload</a> | <a href="<c:out value="${Resume.uploadFileLink}" escapeXml="false"/>"><c:out value="${Resume.uploadFileName}"/></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-	<tags:pagination page="${jobs}" paginationSize="5" />
+	<tags:pagination page="${resumes}" paginationSize="5" />
 
 	<div>
-		<a class="btn" href="${ctx}/job/create">Create Job</a>
+		<a class="btn" href="${ctx}/resume/create">Create Resume</a>
 	</div>
 </body>
 </html>

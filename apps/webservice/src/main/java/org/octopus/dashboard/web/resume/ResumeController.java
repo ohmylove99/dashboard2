@@ -28,7 +28,7 @@ import com.google.common.collect.Maps;
 @RequestMapping(value = "/resume")
 public class ResumeController {
 
-	private static final String PAGE_SIZE = "3";
+	private static final String PAGE_SIZE = "10";
 
 	private static Map<String, String> sortTypes = Maps.newLinkedHashMap();
 	static {
@@ -64,7 +64,7 @@ public class ResumeController {
 	}
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid Resume newResume, RedirectAttributes redirectAttributes) {
+	public String create(@Valid Resume newResume, RedirectAttributes redirectAttributes,@RequestParam(value = "job") int job) {
 		User user = new User(getCurrentUserId());
 		newResume.setUpdatedBy(user.getLoginName());
 

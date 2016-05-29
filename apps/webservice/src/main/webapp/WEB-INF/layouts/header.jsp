@@ -1,11 +1,20 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="pagePath" value="${pageContext.request.requestURI}"/>
 <div id="header">
 	<div id="title">
-		<h1>
-			<a href="${ctx}"></a>  <small></small>
+		<h2>
+	<c:choose> 
+      <c:when test="${fn:contains(pagePath, 'login')}">    
+          <a href="${ctx}">Dashboard</a>
+      </c:when> 
+      <c:otherwise>    
+           <a href="${ctx}/task">Recruit</a> - <small><a href="${ctx}/job">Job Management</a> | <a href="${ctx}/resume">Resume Management</a></small>
+      </c:otherwise> 
+    </c:choose> 
 			<shiro:user>
 				<div class="btn-group pull-right">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -24,6 +33,6 @@
 					</ul>
 				</div>
 			</shiro:user>
-		</h1>
+		</h2>
 	</div>
 </div>

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<form id="inputForm" action="${ctx}/job/${action}" method="post"
+	<form id="inputForm" action="${ctx}/resume/${action}" method="post"
 		class="form-horizontal">
 		<input type="hidden" name="id" value="${resume.id}" />
 		<fieldset>
@@ -24,13 +24,24 @@
 			</div>
 			
 			
-			<div class="control-group">
+			
+			<c:if test="${empty resume.id}">
+                <div class="control-group">
 				<label for="description" class="control-label">Status</label>
 				<div class="controls">
-					<input type="text" id="status" name="status" class="input-large">${resume.status}</input>
+					<input type="text" id="status" name="status" class="input-large" value="Open"></input>
 				</div>
-			</div>
-			
+				</div>
+            </c:if>
+            <c:if test="${not empty resume.id}">
+                <div class="control-group">
+				<label for="description" class="control-label">Status</label>
+				<div class="controls">
+					<input type="text" id="status" name="status" class="input-large" value="${resume.status}"></input>
+				</div>
+				</div>
+            </c:if>
+            
 			<div class="control-group">
 				<label for="description" class="control-label">Skills</label>
 				<div class="controls">
@@ -38,6 +49,13 @@
 				</div>
 			</div>
 			
+			<!-- <div class="control-group">
+				<label for="description" class="control-label">Job</label>
+				<div class="controls">
+					<input type="text" id="job" name="job" class="input-large"></input>
+				</div>
+			</div> -->
+				
 			<div class="form-actions">
 				<input id="submit_btn" class="btn btn-primary" type="submit"
 					value="Submit" />&nbsp; <input id="cancel_btn" class="btn"
@@ -61,6 +79,18 @@
 				 };
 		        }    
 			 });
+			/*$('#job').autocomplete({
+				serviceUrl: '${pageContext.request.contextPath}/api/v1/job',
+				paramName: "name",
+				delimiter: ",",
+			   	transformResult: function(response) {
+				return {      	
+				  suggestions: $.map($.parseJSON(response), function(item) {      	
+				      return { value: item.name, data: item.id };
+				   })        
+				 };
+		        }    
+			 });*/
 		});
 	</script>
 </body>

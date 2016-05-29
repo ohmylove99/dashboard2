@@ -14,7 +14,7 @@
 <body>
 	<h2>404 - Page not exsit</h2>
 	<p>
-		<a href="<c:url value="/"/>">返回首页</a>
+		<a href="<c:url value="/"/>">Home</a>
 	</p>
 </body>
 </html>

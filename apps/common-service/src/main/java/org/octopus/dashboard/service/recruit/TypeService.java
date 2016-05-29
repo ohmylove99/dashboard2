@@ -8,12 +8,14 @@ import org.octopus.dashboard.dao.recruit.InterviewStatusDaoRepository;
 import org.octopus.dashboard.dao.recruit.JobBizDaoRepository;
 import org.octopus.dashboard.dao.recruit.JobGradeDaoRepository;
 import org.octopus.dashboard.dao.recruit.JobStatusDaoRepository;
+import org.octopus.dashboard.dao.recruit.ResumeStatusDaoRepository;
 import org.octopus.dashboard.model.recruit.EmpType;
 import org.octopus.dashboard.model.recruit.InterviewRound;
 import org.octopus.dashboard.model.recruit.InterviewStatus;
 import org.octopus.dashboard.model.recruit.JobBiz;
 import org.octopus.dashboard.model.recruit.JobGrade;
 import org.octopus.dashboard.model.recruit.JobStatus;
+import org.octopus.dashboard.model.recruit.ResumeStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +35,8 @@ public class TypeService {
 	private InterviewStatusDaoRepository interviewStatusDao;
 	@Autowired
 	private InterviewRoundDaoRepository interviewRoundDao;
+	@Autowired
+	private ResumeStatusDaoRepository resumeStatusDao;
 
 	public EmpType getEmpType(Long id) {
 		return empTypeDao.findOne(id);
@@ -117,7 +121,7 @@ public class TypeService {
 	public List<InterviewStatus> getAllInterviewStatus() {
 		return (List<InterviewStatus>) interviewStatusDao.findAll();
 	}
-	
+
 	//
 	public InterviewRound getInterviewRound(Long id) {
 		return interviewRoundDao.findOne(id);
@@ -133,5 +137,22 @@ public class TypeService {
 
 	public List<InterviewRound> getAllInterviewRound() {
 		return (List<InterviewRound>) interviewRoundDao.findAll();
+	}
+
+	//
+	public ResumeStatus getResumeStatus(Long id) {
+		return resumeStatusDao.findOne(id);
+	}
+
+	public void saveResumeStatus(ResumeStatus entity) {
+		resumeStatusDao.save(entity);
+	}
+
+	public void deleteResumeStatus(Long id) {
+		resumeStatusDao.delete(id);
+	}
+
+	public List<ResumeStatus> getAllResumeStatus() {
+		return (List<ResumeStatus>) resumeStatusDao.findAll();
 	}
 }

@@ -29,7 +29,7 @@
 			</div>
 			<div class="form-actions">
 				<input id="submit_btn" class="btn btn-primary" type="submit"
-					value="提交" />&nbsp; <input id="cancel_btn" class="btn"
+					value="Submit" />&nbsp; <input id="cancel_btn" class="btn"
 					type="button" value="Return" onclick="history.back()" />
 			</div>
 		</fieldset>

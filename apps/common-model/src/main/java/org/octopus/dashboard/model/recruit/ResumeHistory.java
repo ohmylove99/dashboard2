@@ -22,7 +22,7 @@ public class ResumeHistory extends IdAuditEntity {
 	protected String skills;
 	protected String uploadFileName;
 	protected String uploadFileLink;
-
+	protected String contactInfo;
 	private String description;
 	private String kvs;
 	private byte[] originalDoc;
@@ -30,6 +30,14 @@ public class ResumeHistory extends IdAuditEntity {
 	//
 	protected String pid;
 	protected Long version;
+
+	public String getContactInfo() {
+		return contactInfo;
+	}
+
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
+	}
 
 	public String getUploadFileName() {
 		return uploadFileName;
