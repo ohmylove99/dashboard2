@@ -16,8 +16,10 @@ drop table if exists ss_m_resumestatus;
 drop table if exists ss_m_jobgrade;
 drop table if exists ss_m_biz;
 
-drop table if exsits ss_job2resume;
-drop table if exsits ss_resume2interview;
+drop table if exists ss_job2resume;
+drop table if exists ss_resume2interview;
+
+drop table if exists ss_m_status;
 
 drop table if exists tt_project;
 drop table if exists tt_task;
@@ -207,6 +209,15 @@ create table ss_m_resumestatus (
 	id bigint auto_increment,
 	isactive int,
 	name varchar(128),
+    primary key (id)
+) engine=InnoDB;
+
+create table ss_m_status (
+	id bigint auto_increment,
+	isactive int,
+	name varchar(128),
+	description varchar(128),
+	dtype varchar(64),
     primary key (id)
 ) engine=InnoDB;
 

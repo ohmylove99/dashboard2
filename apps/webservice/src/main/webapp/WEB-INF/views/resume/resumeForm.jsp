@@ -10,9 +10,10 @@
 	<form id="inputForm" action="${ctx}/resume/${action}" method="post"
 		class="form-horizontal">
 		<input type="hidden" name="id" value="${resume.id}" />
+		<input type="hidden" name="jobid" id="jobid" />
 		<fieldset>
 			<legend>
-				<small>Manage Job</small>
+				<small>Manage Resume</small>
 			</legend>
 
 			<div class="control-group">
@@ -22,8 +23,6 @@
 						class="input-large required" minlength="3" />
 				</div>
 			</div>
-			
-			
 			
 			<c:if test="${empty resume.id}">
                 <div class="control-group">
@@ -46,6 +45,13 @@
 				<label for="description" class="control-label">Skills</label>
 				<div class="controls">
 					<textarea id="description" name="description" class="input-large" >${resume.skills}</textarea>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label for="description" class="control-label">Assign to Job</label>
+				<div class="controls">
+					<input type="text" id="positiondesc" name="positiondesc" class="input-large" value="${resume.job.name}"/>
 				</div>
 			</div>
 			
@@ -79,10 +85,15 @@
 				 };
 		        }    
 			 });
-			/*$('#job').autocomplete({
+			$('#positiondesc').autocomplete({
 				serviceUrl: '${pageContext.request.contextPath}/api/v1/job',
 				paramName: "name",
 				delimiter: ",",
+				onSelect: function (suggestion) {  
+			        //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+			        $('#jobid').val(suggestion.data);
+			        //alert($('#position').val());
+			    },  
 			   	transformResult: function(response) {
 				return {      	
 				  suggestions: $.map($.parseJSON(response), function(item) {      	
@@ -90,7 +101,7 @@
 				   })        
 				 };
 		        }    
-			 });*/
+			 });
 		});
 	</script>
 </body>

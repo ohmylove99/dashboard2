@@ -6,8 +6,10 @@ import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
+import org.octopus.dashboard.model.recruit.Job;
 import org.octopus.dashboard.model.recruit.Resume;
 import org.octopus.dashboard.model.recruit.User;
+import org.octopus.dashboard.service.recruit.JobService;
 import org.octopus.dashboard.service.recruit.ResumeService;
 import org.octopus.dashboard.service.recruit.account.ShiroDbRealm.ShiroUser;
 import org.octopus.dashboard.shared.web.Servlets;
@@ -39,6 +41,9 @@ public class ResumeController {
 	@Autowired
 	private ResumeService resumeService;
 
+	@Autowired
+	private JobService jobService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
@@ -64,7 +69,8 @@ public class ResumeController {
 	}
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid Resume newResume, RedirectAttributes redirectAttributes,@RequestParam(value = "job") int job) {
+	public String create(@Valid Resume newResume, RedirectAttributes redirectAttributes,
+			@RequestParam(value = "job") int job) {
 		User user = new User(getCurrentUserId());
 		newResume.setUpdatedBy(user.getLoginName());
 
@@ -81,7 +87,16 @@ public class ResumeController {
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("resume") Resume resume, RedirectAttributes redirectAttributes) {
+	public String update(@ModelAttribute("resume") Resume resume, RedirectAttributes redirectAttributes,
+			@RequestParam String jobid) {
+		Long id;
+		try {
+			id = Long.parseLong(jobid);
+			Job job = jobService.getJob(id);
+			resume.setJob(job);
+		} catch (Exception e) {
+			
+		}
 		resumeService.updateResume(resume);
 		redirectAttributes.addFlashAttribute("message", "update resume succesfully");
 		return "redirect:/resume/";

@@ -12,9 +12,8 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
-@Table(name = "ss_jobhis")
+@Table(name = "ss_resumehis")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
 public class ResumeHistory extends IdAuditEntity {
 	private Job job;
 	private String name;

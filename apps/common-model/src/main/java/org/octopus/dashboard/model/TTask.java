@@ -2,27 +2,14 @@ package org.octopus.dashboard.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "tt_task")
-@NamedQuery(name = "TTask.findAll", query = "SELECT t FROM TTask t")
 public class TTask implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6547092022795244411L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private long id;
 	private long version;
 
@@ -30,10 +17,6 @@ public class TTask implements Serializable {
 
 	private String updatedBy;
 	private Date updatedTime;
-
-	// bi-directional many-to-one association to TTaskaudit
-	@OneToMany(mappedBy = "ttTask")
-	private List<TTaskAudit> taskAudits;
 
 	public String getUpdatedBy() {
 		return updatedBy;

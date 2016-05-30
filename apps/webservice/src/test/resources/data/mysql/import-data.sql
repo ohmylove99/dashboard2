@@ -57,6 +57,38 @@ insert into ss_m_resumestatus (id, name, isactive) values(9, 'Offer-Pass', 1);
 insert into ss_m_resumestatus (id, name, isactive) values(10, 'Onboarding', 1);
 insert into ss_m_resumestatus (id, name, isactive) values(11, 'Onboarded', 1);
 
+insert into ss_m_status (id, name,isactive,dtype) values(1, 'DH',1,'EMPTYPE');
+insert into ss_m_status (id, name,isactive,dtype) values(2, 'VD',1,'EMPTYPE');
+
+insert into ss_m_status (id, name,isactive,dtype) values(3, 'Request',0,'JOBSTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(4, 'Open',1,'JOBSTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(5, 'Re-Open',1,'JOBSTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(6, 'Open-Offer',1,'JOBSTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(7, 'Open-Onboard',1,'JOBSTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(8, 'Close',1,'JOBSTATUS');
+
+insert into ss_m_status (id, name,isactive,dtype) values(9, 'Pass',1,'INTERVIEWSTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(10, 'Reject',1,'INTERVIEWSTATUS');
+
+insert into ss_m_status (id, name,isactive,dtype) values(11, 'C8',1,'JOBGRADE');
+insert into ss_m_status (id, name,isactive,dtype) values(12, 'C9',1,'JOBGRADE');
+insert into ss_m_status (id, name,isactive,dtype) values(13, 'C10',1,'JOBGRADE');
+insert into ss_m_status (id, name,isactive,dtype) values(14, 'C11',1,'JOBGRADE');
+insert into ss_m_status (id, name,isactive,dtype) values(16, 'C12',1,'JOBGRADE');
+insert into ss_m_status (id, name,isactive,dtype) values(17, 'C13',1,'JOBGRADE');
+insert into ss_m_status (id, name,isactive,dtype) values(18, 'C14',1,'JOBGRADE');
+
+insert into ss_m_status (id, name,isactive,dtype) values(19, 'Resume-Review',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(20, 'Resume-Review-Reject',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(21, 'Resume-Review-Pass',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(22, 'Interviewing',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(23, 'Interview-Reject',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(24, 'Interview-Pass',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(25, 'Offering',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(26, 'Offer-Reject',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(27, 'Offer-Taken',1,'RESUMESTATUS');
+insert into ss_m_status (id, name,isactive,dtype) values(28, 'Onboard',1,'RESUMESTATUS');
+
 insert into tt_project (id, name) values(1, 'My Project');
 insert into tt_project (id, name) values(2, 'Your Project');
 

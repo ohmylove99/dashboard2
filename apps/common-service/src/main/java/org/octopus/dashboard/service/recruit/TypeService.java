@@ -9,6 +9,7 @@ import org.octopus.dashboard.dao.recruit.JobBizDaoRepository;
 import org.octopus.dashboard.dao.recruit.JobGradeDaoRepository;
 import org.octopus.dashboard.dao.recruit.JobStatusDaoRepository;
 import org.octopus.dashboard.dao.recruit.ResumeStatusDaoRepository;
+import org.octopus.dashboard.dao.recruit.StatusDaoRepository;
 import org.octopus.dashboard.model.recruit.EmpType;
 import org.octopus.dashboard.model.recruit.InterviewRound;
 import org.octopus.dashboard.model.recruit.InterviewStatus;
@@ -16,6 +17,7 @@ import org.octopus.dashboard.model.recruit.JobBiz;
 import org.octopus.dashboard.model.recruit.JobGrade;
 import org.octopus.dashboard.model.recruit.JobStatus;
 import org.octopus.dashboard.model.recruit.ResumeStatus;
+import org.octopus.dashboard.model.recruit.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +40,30 @@ public class TypeService {
 	@Autowired
 	private ResumeStatusDaoRepository resumeStatusDao;
 
+	@Autowired
+	private StatusDaoRepository statusDao;
+
+	public Status getStatus(Long id) {
+		return statusDao.findOne(id);
+	}
+
+	public void saveStatus(Status entity) {
+		statusDao.save(entity);
+	}
+
+	public void deleteStatus(Long id) {
+		statusDao.delete(id);
+	}
+
+	public List<Status> getAllStatus() {
+		return (List<Status>) statusDao.findAll();
+	}
+
+	public List<Status> getAllStatusByType(String type) {
+		return (List<Status>) statusDao.findByDtype(type);
+	}
+
+	//
 	public EmpType getEmpType(Long id) {
 		return empTypeDao.findOne(id);
 	}

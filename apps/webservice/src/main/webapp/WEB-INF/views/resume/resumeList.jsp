@@ -23,7 +23,9 @@
 		</div>
 		<tags:sort />
 	</div>
-
+	<legend>
+				<small>Manage Resume</small>
+			</legend>
 	<table id="contentTable"
 		class="table table-striped table-bordered table-condensed">
 		<thead>

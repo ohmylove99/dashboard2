@@ -23,7 +23,9 @@
 		</div>
 		<tags:sort />
 	</div>
-
+	<legend>
+				<small>Manage Job</small>
+			</legend>
 	<table id="contentTable"
 		class="table table-striped table-bordered table-condensed">
 		<thead>
@@ -34,17 +36,18 @@
 				<th>OpenByBiz</th>
 				<th>Status</th>
 				<th>Manage</th>
+				<th>Assigned Resumes</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${jobs.content}" var="Job">
 				<tr>
-					<td><a href="${ctx}/Job/update/${Job.id}">${Job.name}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.description}">${Job.description}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.openBy}">${Job.openBy}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.openByBiz}">${Job.openByBiz}</a></td>
-					<td><a href="${ctx}/Job/update/${Job.status}">${Job.status}</a></td>
-					<td><a href="${ctx}/Job/delete/${Job.id}">Delete</a></td>
+					<td><a href="${ctx}/job/update/${Job.id}">${Job.name}</a></td>
+					<td>${Job.description}</td>
+					<td>${Job.openBy}</td>
+					<td>${Job.openByBiz}</td>
+					<td>${Job.status}</td>
+					<td><a href="${ctx}/job/update/${Job.id}">update</a>|<a href="${ctx}/job/delete/${Job.id}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
