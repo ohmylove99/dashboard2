@@ -24,7 +24,9 @@
 		<tags:sort />
 	</div>
 	<legend>
-				<small>Manage Resume</small>
+				<small>Manage Resume<c:if test="${not empty jobName}">
+		 By Job - <a href="${ctx}/job">${jobName}</a>
+</c:if></small>
 			</legend>
 	<table id="contentTable"
 		class="table table-striped table-bordered table-condensed">

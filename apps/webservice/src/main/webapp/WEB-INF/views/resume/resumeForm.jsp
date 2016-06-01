@@ -10,7 +10,7 @@
 	<form id="inputForm" action="${ctx}/resume/${action}" method="post"
 		class="form-horizontal">
 		<input type="hidden" name="id" value="${resume.id}" />
-		<input type="hidden" name="jobid" id="jobid" />
+		<input type="hidden" name="jobId" id="jobId" />
 		<fieldset>
 			<legend>
 				<small>Manage Resume</small>
@@ -91,7 +91,8 @@
 				delimiter: ",",
 				onSelect: function (suggestion) {  
 			        //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-			        $('#jobid').val(suggestion.data);
+			        $('#positiondesc').val(suggestion.value);
+			        $('#jobId').val(suggestion.data);
 			        //alert($('#position').val());
 			    },  
 			   	transformResult: function(response) {

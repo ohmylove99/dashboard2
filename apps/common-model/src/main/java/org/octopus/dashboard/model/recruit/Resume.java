@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "ss_resume")
@@ -75,7 +76,7 @@ public class Resume extends IdAuditEntity {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-
+	@NotBlank
 	public String getName() {
 		return name;
 	}

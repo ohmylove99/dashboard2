@@ -26,32 +26,32 @@
 			<div class="control-group">
 				<label for="description" class="control-label">Reference Id</label>
 				<div class="controls">
-					<input type="text" id="referenceid" name="referenceid" class="input-large">${job.referenceid}</input>
+					<input type="text" id="referenceid" name="referenceid" class="input-large" value="${job.referenceid}">
 				</div>
 			</div>
 			
 			<div class="control-group">
 				<label for="description" class="control-label">Status</label>
 				<div class="controls">
-					<input type="text" id="status" name="status" class="input-large">${job.status}</input>
+					<input type="text" id="status" name="status" class="input-large" value="${job.status}">
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="description" class="control-label">Open By</label>
 				<div class="controls">
-					<input type="text" id="openBy" name="openBy" class="input-large">${job.openBy}</input>
+					<input type="text" id="openBy" name="openBy" class="input-large" value="${job.openBy}">
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="description" class="control-label">Open By Biz</label>
 				<div class="controls">
-					<input type="text" id="openByBiz" name="openByBiz" class="input-large">${job.openByBiz}</input>
+					<input type="text" id="openByBiz" name="openByBiz" class="input-large" value="${job.openByBiz}">
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="description" class="control-label">Interviewer</label>
 				<div class="controls">
-					<input type="text" id="interviewer" name="interviewer" class="input-large">${job.interviewer}</input>
+					<input type="text" id="interviewer" name="interviewer" class="input-large" value="${job.interviewer}">
 				</div>
 			</div>
 			

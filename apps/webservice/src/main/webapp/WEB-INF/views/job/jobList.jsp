@@ -13,6 +13,8 @@
 		<div id="message" class="alert alert-success">
 			<button data-dismiss="alert" class="close">×</button>${message}</div>
 	</c:if>
+	<table id="tree"></table>
+	<div id="pager"></div>
 	<div class="row">
 		<div class="span4 offset7">
 			<form class="form-search" action="#">
@@ -24,8 +26,8 @@
 		<tags:sort />
 	</div>
 	<legend>
-				<small>Manage Job</small>
-			</legend>
+		<small>Manage Job</small>
+	</legend>
 	<table id="contentTable"
 		class="table table-striped table-bordered table-condensed">
 		<thead>
@@ -47,7 +49,9 @@
 					<td>${Job.openBy}</td>
 					<td>${Job.openByBiz}</td>
 					<td>${Job.status}</td>
-					<td><a href="${ctx}/job/update/${Job.id}">update</a>|<a href="${ctx}/job/delete/${Job.id}">Delete</a></td>
+					<td><a href="${ctx}/job/update/${Job.id}">update</a>|<a
+						href="${ctx}/job/delete/${Job.id}">Delete</a></td>
+					<td><a href="${ctx}/resume/jobresumes?jobId=${Job.id}">Resumes</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -58,5 +62,7 @@
 	<div>
 		<a class="btn" href="${ctx}/job/create">Create Job</a>
 	</div>
+
+
 </body>
 </html>

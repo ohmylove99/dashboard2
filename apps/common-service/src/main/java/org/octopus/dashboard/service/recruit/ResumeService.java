@@ -10,6 +10,7 @@ import org.octopus.dashboard.model.recruit.Resume;
 import org.octopus.dashboard.service.recruit.account.ShiroDbRealm.ShiroUser;
 import org.octopus.dashboard.shared.persistence.DynamicSpecifications;
 import org.octopus.dashboard.shared.persistence.SearchFilter;
+import org.octopus.dashboard.shared.persistence.SearchFilter.Operator;
 import org.octopus.dashboard.shared.utils.clock.ClockFactory;
 import org.octopus.dashboard.shared.utils.clock.IClock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,14 @@ public class ResumeService {
 		resumeHistoryDao.save(resume.createAudit());
 	}
 
+	public Page<Resume> getJobResumes(Long jobId, Map<String, Object> searchParams, int pageNumber, int pageSize,
+			String sortType) {
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		Specification<Resume> spec = buildSpecification(jobId, searchParams);
+
+		return resumeDao.findAll(spec, pageRequest);
+	}
+
 	public Page<Resume> getResumes(Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		Specification<Resume> spec = buildSpecification(searchParams);
@@ -90,6 +99,13 @@ public class ResumeService {
 
 	private Specification<Resume> buildSpecification(Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+		Specification<Resume> spec = DynamicSpecifications.bySearchFilter(filters.values(), Resume.class);
+		return spec;
+	}
+
+	private Specification<Resume> buildSpecification(Long jobId, Map<String, Object> searchParams) {
+		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
+		filters.put("job.id", new SearchFilter("job.id", Operator.EQ, jobId));
 		Specification<Resume> spec = DynamicSpecifications.bySearchFilter(filters.values(), Resume.class);
 		return spec;
 	}

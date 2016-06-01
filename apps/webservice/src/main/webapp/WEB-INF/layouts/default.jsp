@@ -33,6 +33,11 @@
 	type="text/javascript"></script>
 
 
+
+<link rel="stylesheet" type="text/css" href="${ctx}/static/styles/jquery-ui-min.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/static/style/ui.jqgrid.css" />
+<script src="${ctx}/static/jquery/grid.locale-en.js" type="text/javascript"></script>
+<script src="${ctx}/static/jquery/jquery.jqGrid.min.js" type="text/javascript"></script>
 <sitemesh:head />
 </head>
 

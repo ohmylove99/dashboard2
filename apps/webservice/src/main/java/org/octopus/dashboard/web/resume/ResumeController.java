@@ -61,6 +61,23 @@ public class ResumeController {
 		return "resume/resumeList";
 	}
 
+	@RequestMapping(value = "jobresumes", method = RequestMethod.GET)
+	public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
+			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
+			@RequestParam(value = "jobId", defaultValue = PAGE_SIZE) long jobId, Model model, ServletRequest request) {
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
+
+		Page<Resume> resumes = resumeService.getJobResumes(jobId, searchParams, pageNumber, pageSize, sortType);
+		model.addAttribute("jobName", jobService.getJob(jobId).getName());
+		model.addAttribute("resumes", resumes);
+		model.addAttribute("sortType", sortType);
+		model.addAttribute("sortTypes", sortTypes);
+		model.addAttribute("searchParams", Servlets.encodeParameterStringWithPrefix(searchParams, "search_"));
+
+		return "resume/resumeList";
+	}
+
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("resume", new Resume());
@@ -88,14 +105,14 @@ public class ResumeController {
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(@ModelAttribute("resume") Resume resume, RedirectAttributes redirectAttributes,
-			@RequestParam String jobid) {
+			@RequestParam String jobId) {
 		Long id;
 		try {
-			id = Long.parseLong(jobid);
+			id = Long.parseLong(jobId);
 			Job job = jobService.getJob(id);
 			resume.setJob(job);
 		} catch (Exception e) {
-			
+
 		}
 		resumeService.updateResume(resume);
 		redirectAttributes.addFlashAttribute("message", "update resume succesfully");
