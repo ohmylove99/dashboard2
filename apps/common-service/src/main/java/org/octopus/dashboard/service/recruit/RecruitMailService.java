@@ -32,6 +32,7 @@ public class RecruitMailService extends MimeMailService {
 
 	@Override
 	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
+		this.freemarkerConfiguration = freemarkerConfiguration;
 		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", DEFAULT_ENCODING);
 	}
 }

@@ -26,15 +26,26 @@ import freemarker.template.TemplateException;
 public class MimeMailService {
 	protected static final String DEFAULT_ENCODING = "utf-8";
 	private static Logger logger = LoggerFactory.getLogger(MimeMailService.class);
-	@Autowired
+
 	protected Template template;
 
 	@Autowired
 	private JavaMailSender mailSender;
 
-	public String generateContent(Map map) throws MessagingException {
-		try {
+	protected Configuration freemarkerConfiguration;
 
+	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
+		this.freemarkerConfiguration = freemarkerConfiguration;
+		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", DEFAULT_ENCODING);
+	}
+
+	public String generateContent(Map map) throws MessagingException {
+		return generateContent(template, map);
+
+	}
+
+	public String generateContent(Template template, Map map) throws MessagingException {
+		try {
 			return FreeMarkerTemplateUtils.processTemplateIntoString(template, map);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -46,17 +57,16 @@ public class MimeMailService {
 	}
 
 	public File generateAttachment() throws MessagingException {
+		return generateAttachment(new ClassPathResource("/email/mailAttachment.txt"));
+	}
+
+	public File generateAttachment(Resource resource) throws MessagingException {
 		try {
-			Resource resource = new ClassPathResource("/email/mailAttachment.txt");
 			return resource.getFile();
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 			throw new MessagingException("no attachment", e);
 		}
-	}
-
-	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
-		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", DEFAULT_ENCODING);
 	}
 
 	public void sendMimeMail(String from, String[] to, String[] cc, String subject, String content, boolean isHtml) {
@@ -78,6 +88,56 @@ public class MimeMailService {
 
 	}
 
+	public void sendMimeMail(String from, String[] to, String[] cc, String subject, String content, String templatePath,
+			Map templateMap, boolean isHtml) {
+		MimeMessage mailMessage = mailSender.createMimeMessage();
+		try {
+			Template tmplt = freemarkerConfiguration.getTemplate(templatePath, DEFAULT_ENCODING);
+			String cnt = generateContent(tmplt, templateMap);
+			MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage, true, DEFAULT_ENCODING);
+
+			messageHelper.setFrom(from);
+			messageHelper.setTo(to);
+			messageHelper.setCc(cc);
+			messageHelper.setSubject(subject);
+			messageHelper.setText(cnt, isHtml);
+
+			mailSender.send(mailMessage);
+		} catch (IOException e1) {
+			logger.error(e1.getMessage());
+		} catch (MessagingException e) {
+			logger.error(e.getMessage());
+		}
+
+	}
+
+	public void sendMimeMail(String from, String[] to, String[] cc, String subject, String content, String templatePath,
+			Map templateMap, boolean isHtml, File[] inlineFiles, File[] attachFiles) {
+		MimeMessage mailMessage = mailSender.createMimeMessage();
+		try {
+			Template tmplt = freemarkerConfiguration.getTemplate(templatePath, DEFAULT_ENCODING);
+			String cnt = generateContent(tmplt, templateMap);
+			MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage, true, DEFAULT_ENCODING);
+
+			messageHelper.setFrom(from);
+			messageHelper.setTo(to);
+			messageHelper.setCc(cc);
+			messageHelper.setSubject(subject);
+			messageHelper.setText(cnt, isHtml);
+
+			addInlines(inlineFiles, messageHelper);
+
+			addAttachments(attachFiles, messageHelper);
+
+			mailSender.send(mailMessage);
+		} catch (IOException e1) {
+			logger.error(e1.getMessage());
+		} catch (MessagingException e) {
+			logger.error(e.getMessage());
+		}
+
+	}
+
 	public void sendMimeMail(String from, String[] to, String[] cc, String subject, String content, boolean isHtml,
 			File[] inlineFiles, File[] attachFiles) {
 		MimeMessage mailMessage = mailSender.createMimeMessage();
@@ -91,7 +151,7 @@ public class MimeMailService {
 
 			addInlines(inlineFiles, messageHelper);
 
-			addAttachments(inlineFiles, attachFiles, messageHelper);
+			addAttachments(attachFiles, messageHelper);
 
 			mailSender.send(mailMessage);
 		} catch (MessagingException e) {
@@ -100,9 +160,8 @@ public class MimeMailService {
 
 	}
 
-	private void addAttachments(File[] inlineFiles, File[] attachFiles, MimeMessageHelper messageHelper)
-			throws MessagingException {
-		if (inlineFiles != null) {
+	private void addAttachments(File[] attachFiles, MimeMessageHelper messageHelper) throws MessagingException {
+		if (attachFiles != null) {
 			for (File file : attachFiles) {
 				FileSystemResource fsr = new FileSystemResource(file);
 				messageHelper.addAttachment(getAttachmentFileName(file), fsr);
@@ -125,5 +184,13 @@ public class MimeMailService {
 
 	private String getAttachmentFileName(File file) {
 		return file.getName();
+	}
+
+	public JavaMailSender getMailSender() {
+		return mailSender;
+	}
+
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
 	}
 }
